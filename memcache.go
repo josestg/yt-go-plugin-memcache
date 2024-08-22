@@ -67,7 +67,7 @@ func (m *Memcache) Get(ctx context.Context, key string) (string, error) {
 		m.mu.Lock()
 		delete(m.store, key)
 		m.mu.Unlock()
-		return "", cache.ErrNotFound
+		return "", cache.ErrExpired
 	}
 
 	m.log.InfoContext(ctx, "[plugin/memcache] key found", "key", key, "val", v)
